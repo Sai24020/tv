@@ -50,6 +50,10 @@ PowerShell-scripten gör allt automatiskt:
 - Hämtar ditt studentnamn från git
 - Startar testerna
 
+## Usage
+
+Se detaljerad användarguide i [docs/USAGE.md](docs/USAGE.md).
+
 ## Kommandon
 
 | Kommando | Beskrivning |
