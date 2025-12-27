@@ -335,7 +335,13 @@ const getFilteredPrograms = (svt2DataSorted) => {
     return [];
   }
   return svt2DataSorted.filter(
-    (s) => getTimeOnly(new Date("2023-01-01 "+s.start+":00")) > getTimeOnly(new Date())
+    (s) => {
+      // Skapa ett Date-objekt från dagens datum + programtid (HH:MM från s.start)
+      const today = new Date();
+      const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
+      const programDate = new Date(todayStr + " " + s.start + ":00");
+      return getTimeOnly(programDate) > getTimeOnly(new Date());
+    }
   );
 }
 
