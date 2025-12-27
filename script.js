@@ -1,3 +1,12 @@
+// TODO: Definiera Vue-data för TV-program
+// programs = [
+//   { name: 'En perfekt skridskoälv', start: '2021-02-10T17:00:00+01:00', description: '...' },
+//   ...
+// ]
+
+// TODO: renderSchedule() -> visa kommande program med v-for i Vue
+// TODO: toggleMenu() -> ändra hamburger till kryss och visa/dölj sidomeny
+// TODO: showPrevious() -> visa tidigare program när knapp klickas
 
 //--------LÅT STÅ----------- 
   // Definiera fasta "konstanter" för olika typer av animering av menyn
