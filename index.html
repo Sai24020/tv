@@ -18,16 +18,13 @@
     <title>Tv-tablå Labb</title>
   </head>
   <body>
+  <div id="app">
   <!-- Menu-->
-       <div class="menu-icon" onclick="toggleMenu()">
-          <i class="fas fa-bars"></i>
+       <div class="menu-icon" @click="toggleMenu()">
+          <i :class="menuOpen ? 'fas fa-times' : 'fas fa-bars'"></i>
         </div>
-        <ul class="menu">
-          <li onclick="setChannel('SVT 1')">SVT 1</li>
-          <li onclick="setChannel('SVT 2')">SVT 2</li>
-          <li onclick="setChannel('SVT Barn')">SVT Barn</li>
-          <li onclick="setChannel('Kunskapskanalen')">Kunskapskanalen</li>
-          <li onclick="setChannel('SVT 24')">SVT 24</li>
+        <ul class="menu" :class="{ 'menu--show': menuOpen }">
+          <li v-for="channel in channels" :key="channel" @click="setChannel(channel)">{{ channel }}</li>
         </ul>
 
   <!-- Page content -->
@@ -35,29 +32,27 @@
     <div class="row">
       <div class="col-sm-6 offset-sm-2">
       <!-- I DENNA H1 SKA VALD TV-KANALS NAMN SKRIVAS UT -->
-      <h1 id="js-title"></h1>
+      <h1>{{ currentChannel }}</h1>
       <div id="js-schedule">
-        <!-- EXEMPEL-HTML, SOM SKA LÄGGAS IN MED JAVASCRIPT UTIFRÅN JSON-DATA -->
-        <!--
         <ul class="list-group list-group-flush">
-          <li class="list-group-item show-previous">Visa tidigare program</li>
-          <li class="list-group-item">
-            <strong>13:00</strong>
-            <div>Vinterstudion</div>
+          <li v-if="pastPrograms.length" class="list-group-item show-previous">
+            <button class="btn btn-link" @click="showPrevious = !showPrevious">{{ showPrevious ? 'Dölj tidigare' : 'Visa tidigare program' }}</button>
           </li>
-          <li class="list-group-item">
-            <strong>13:30</strong>
-            <div>Alpint: VM</div>
-          </li>    
-        </ul>   
-        -->
+          <li v-for="p in displayedPrograms" :key="p.start + p.name" class="list-group-item">
+            <strong>{{ formatTime(p.start) }}</strong>
+            <div>{{ p.name }}</div>
+            <div>{{ p.description }}</div>
+          </li>
+        </ul>
       </div>
       <!-- DENNA VISAS BARA NÄR INGEN DATA LADDATS-->
-      <img src="loading.gif" id="js-loading" class="loading-spinner hidden" alt="Page loader"/>
+      <img src="loading.gif" id="js-loading" class="loading-spinner" :class="{ hidden: !loading }" alt="Page loader"/>
      </div>
     </div>
   </div>
-  
-      <script src="script.js"></script>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="script.js"></script>
   </body>
 </html>
